@@ -9,31 +9,13 @@ from langchain_core.prompts import PromptTemplate
 
 st.title("Video QA Chatbot")
 
-video_url = st.text_input("Enter YouTube Video URL")
+video_id = st.text_input("Enter YouTube Video ID")
 lang = st.selectbox("Select Language", ["en", "hi", "fr", "es", "de", "it", "ja", "ko", "pt"])
 question = st.text_input("Ask a question about the video")
 
-def extract_youtube_id(url: str) -> str:
-    parsed_url = urlparse(url)
-
-    # Handle youtu.be short links
-    if parsed_url.netloc in ["youtu.be"]:
-        return parsed_url.path.lstrip('/')
-
-    # Handle youtube.com links
-    if parsed_url.netloc in ["www.youtube.com", "youtube.com"]:
-        if parsed_url.path == "/watch":
-            query_params = parse_qs(parsed_url.query)
-            return query_params.get("v", [None])[0]
-        elif parsed_url.path.startswith("/embed/"):
-            return parsed_url.path.split("/")[2]
-
-    return None
 
 if st.button("Generate Answer"):
     
-
-    video_id = extract_youtube_id(video_url)
     if video_id:
         try:
            
