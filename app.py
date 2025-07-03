@@ -5,6 +5,14 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_huggingface import ChatHuggingFace,HuggingFaceEmbeddings,HuggingFaceEndpoint
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
+from youtube_transcript_api.proxies import WebshareProxyConfig
+
+ytt_api = YouTubeTranscriptApi(
+    proxy_config=WebshareProxyConfig(
+        proxy_username="utykulbt",
+        proxy_password="17pyofodhow5",
+    )
+)
 
 
 st.title("Video QA Chatbot")
